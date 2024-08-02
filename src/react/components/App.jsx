@@ -1,5 +1,13 @@
 import React, {useState} from 'react';
-import {AppBar, Tabs, Tab, Typography, Box, Container} from '@mui/material';
+import {
+  AppBar,
+  Tabs,
+  Tab,
+  Typography,
+  Box,
+  Container,
+  Pagination,
+} from '@mui/material';
 import solglyph from '../assets/SolGlyph_android.png';
 import clout from '../assets/clout_logo.png';
 import nx from '../assets/nx_logo.png';
@@ -12,9 +20,13 @@ const App = () => {
   const [value, setValue] = useState(0);
   const [selectedItem, setSelectedItem] = useState(null);
 
+  const [page, setPage] = useState(1);
+  const itemsPerPage = 10; // Set the number of items per page
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
     setSelectedItem(null); // Reset selected item when tab changes
+    setPage(1); // Reset to the first page when tab changes
   };
 
   // Mapping title to corresponding logo
@@ -81,22 +93,41 @@ const App = () => {
             fontSize: '18px',
             color: 'white',
             textAlign: 'center',
-            fontWeight: 'bold',
             mt: 7,
             py: 2,
           }}>
-          {newItems.length} airdrops listed
+          {newItems.length} AIRDROPS LISTED
         </Typography>
-        <ItemList items={newItems} onItemClick={handleItemClick} />
+        <ItemList
+          items={newItems}
+          onItemClick={handleItemClick}
+          page={page}
+          setPage={setPage}
+          itemsPerPage={itemsPerPage}
+        />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <ItemList items={promotedItems} onItemClick={handleItemClick} />
+        <ItemList
+          items={promotedItems}
+          onItemClick={handleItemClick}
+          page={page}
+          setPage={setPage}
+          itemsPerPage={itemsPerPage}
+        />
       </TabPanel>
     </Box>
   );
 };
 
-const ItemList = ({items, onItemClick}) => {
+const ItemList = ({items, onItemClick, page, setPage, itemsPerPage}) => {
+  const startIndex = (page - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const paginatedItems = items.slice(startIndex, endIndex);
+
+  const handlePageChange = (event, value) => {
+    setPage(value);
+  };
+
   return (
     <Container maxWidth="sm">
       <Box
@@ -117,13 +148,13 @@ const ItemList = ({items, onItemClick}) => {
               color: '#fff',
               fontSize: '15px',
               textAlign: 'center',
-              mt: 2, // Add some margin for spacing
-              py: 10,
+              mt: 5, // Add some margin for spacing
+              py: 8,
             }}>
             No promoted airdrops yet, visit solglyph to promote your airdrop.
           </Typography>
         ) : (
-          items.map((item, index) => (
+          paginatedItems.map((item, index) => (
             <Box
               key={index}
               onClick={() => onItemClick(item)}
@@ -167,6 +198,24 @@ const ItemList = ({items, onItemClick}) => {
             </Box>
           ))
         )}
+        {items.length > itemsPerPage && (
+          <Pagination
+            count={Math.ceil(items.length / itemsPerPage)}
+            page={page}
+            onChange={handlePageChange}
+            color="standard"
+            sx={{
+              mt: 2,
+              mb: 1,
+              '& .MuiPaginationItem-root': {
+                color: '#fff',
+              },
+              '& .Mui-selected': {
+                color: '#46ACC2',
+              },
+            }}
+          />
+        )}
         <Box
           onClick={() => window.open('https://solglyph.com', '_blank')}
           sx={{
@@ -195,7 +244,7 @@ const ItemList = ({items, onItemClick}) => {
               textAlign: 'center',
               fontWeight: 'bold',
             }}>
-            Visit Solglyph
+            VISIT SOLGLYPH
           </Typography>
         </Box>
       </Box>

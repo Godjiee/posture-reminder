@@ -225,8 +225,6 @@ const Details = ({item, onBack}) => {
               color: '#D4D0CA',
               whiteSpace: 'pre-line', // Keeps text formatting
               mb: 2, // Adds more space between paragraphs
-              textAlign: 'justify',
-              textJustify: 'inter-word',
             }}>
             {line.trim() && line.trim()}{' '}
             {/* Ensures blank lines are not added */}
