@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "Solglyph Airdrop Alert",
-  "description": "Keep track and stay updated with the current airdrops out there",
+  "name": "posture-reminder",
+  "description": "Do not sleep on your health, a simple reminder for those in the grind",
   "version": "1.0.0",
   "action": {
     "default_popup": "index.html"
