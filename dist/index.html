@@ -1,0 +1,36 @@
+<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Popup</title><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=General+Sans:wght@400;600&display=swap" rel="stylesheet"><style>body {
+      width: 330px;
+      overflow: hidden;
+      background-color: #0A1622;
+    }
+
+    /* global.css */
+
+    /* Custom scrollbar styling for WebKit browsers */
+    html {
+      /* Default scrollbars */
+      scrollbar-width: thin;
+      /* For Firefox */
+      scrollbar-color: #46aCC2 #1b263b;
+      /* For Firefox */
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: #46aCC2;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background-color: #3498db;
+      /* Slightly lighter for hover effect */
+    }
+
+    ::-webkit-scrollbar-track {
+      background-color: #1b263b;
+      border-radius: 4px;
+    }</style><script defer="defer" src="contentScript.js"></script><script defer="defer" src="background.js"></script><script defer="defer" src="react.js"></script></head><body><div id="root"></div><script src="./react.js"></script></body></html>
